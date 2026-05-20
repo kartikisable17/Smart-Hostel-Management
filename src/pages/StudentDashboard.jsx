@@ -1,305 +1,101 @@
-// import React, { useState } from "react";
-// import {
-//   FaHome,
-//   FaClipboardCheck,
-//   FaCalendarAlt,
-//   FaExclamationTriangle,
-//   FaBell,
-//   FaUserGraduate,
-// } from "react-icons/fa";
+import React from "react";
 
-// const StudentDashboard = () => {
+const StudentDashboard = () => {
+  return (
+    <div className="min-h-screen bg-[#07111f] text-white flex">
 
-//   // Active Page
-//   const [activePage, setActivePage] = useState("dashboard");
+      {/* SIDEBAR */}
+      <div className="w-[250px] bg-white/10 backdrop-blur-xl border-r border-white/10 p-6">
 
-//   // Complaint Form States
-//   const [title, setTitle] = useState("");
-//   const [description, setDescription] = useState("");
+        <h1 className="text-3xl font-bold text-cyan-400">
+          VSS Hostel
+        </h1>
 
-//   // Complaint List
-//   const [complaints, setComplaints] = useState([]);
+        <div className="mt-10 flex flex-col gap-5">
 
-//   // Submit Complaint
-//   const handleComplaint = () => {
+          <button className="text-left p-4 rounded-xl bg-cyan-500/20 hover:bg-cyan-500 duration-300">
+            Dashboard
+          </button>
 
-//     if (title === "" || description === "") {
-//       alert("Please fill all fields");
-//       return;
-//     }
+          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
+            Leave Application
+          </button>
 
-//     const newComplaint = {
-//       title,
-//       description,
-//     };
+          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
+            Complaints
+          </button>
 
-//     setComplaints([...complaints, newComplaint]);
+          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
+            Attendance
+          </button>
 
-//     setTitle("");
-//     setDescription("");
+          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
+            Notices
+          </button>
 
-//     alert("Complaint Submitted");
-//   };
+          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-red-500 duration-300 mt-10">
+            Logout
+          </button>
 
-//   return (
-//     <div className="min-h-screen flex bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#1e293b] text-white">
+        </div>
+      </div>
 
-//       {/* Sidebar */}
-//       <div className="w-64 bg-[#081028] p-6">
+      {/* MAIN CONTENT */}
+      <div className="flex-1 p-8">
 
-//         <h1 className="text-4xl font-bold text-cyan-400 mb-10">
-//           HostelMS
-//         </h1>
+        {/* TOP */}
+        <div className="flex justify-between items-center">
 
-//         <div className="space-y-4">
+          <div>
+            <h1 className="text-4xl font-bold">
+              Student Dashboard
+            </h1>
 
-//           {/* Dashboard */}
-//           <button
-//             onClick={() => setActivePage("dashboard")}
-//             className="w-full bg-cyan-500 p-3 rounded-xl flex items-center gap-3 hover:scale-105 transition"
-//           >
-//             <FaHome />
-//             Dashboard
-//           </button>
+            <p className="text-gray-400 mt-2">
+              Welcome back, Student 👋
+            </p>
+          </div>
 
-//           {/* Attendance */}
-//           <button
-//             onClick={() => setActivePage("attendance")}
-//             className="w-full bg-[#1e293b] p-3 rounded-xl flex items-center gap-3 hover:bg-cyan-500 transition"
-//           >
-//             <FaClipboardCheck />
-//             Attendance
-//           </button>
+        </div>
 
-//           {/* Leave */}
-//           <button
-//             onClick={() => setActivePage("leave")}
-//             className="w-full bg-[#1e293b] p-3 rounded-xl flex items-center gap-3 hover:bg-cyan-500 transition"
-//           >
-//             <FaCalendarAlt />
-//             Apply Leave
-//           </button>
+        {/* CARDS */}
+        <div className="grid grid-cols-3 gap-6 mt-10">
 
-//           {/* Complaints */}
-//           <button
-//             onClick={() => setActivePage("complaints")}
-//             className="w-full bg-[#1e293b] p-3 rounded-xl flex items-center gap-3 hover:bg-cyan-500 transition"
-//           >
-//             <FaExclamationTriangle />
-//             Complaints
-//           </button>
+          <div className="bg-cyan-500/20 p-6 rounded-3xl">
+            <h2 className="text-2xl font-bold">
+              Leave Status
+            </h2>
 
-//           {/* Notifications */}
-//           <button
-//             onClick={() => setActivePage("notifications")}
-//             className="w-full bg-[#1e293b] p-3 rounded-xl flex items-center gap-3 hover:bg-cyan-500 transition"
-//           >
-//             <FaBell />
-//             Notifications
-//           </button>
-//         </div>
-//       </div>
+            <p className="mt-4 text-gray-300">
+              No Leave Applied
+            </p>
+          </div>
 
-//       {/* Main Content */}
-//       <div className="flex-1 p-8">
+          <div className="bg-pink-500/20 p-6 rounded-3xl">
+            <h2 className="text-2xl font-bold">
+              Complaints
+            </h2>
 
-//         {/* DASHBOARD PAGE */}
-//         {activePage === "dashboard" && (
+            <p className="mt-4 text-gray-300">
+              0 Active Complaints
+            </p>
+          </div>
 
-//           <div>
+          <div className="bg-green-500/20 p-6 rounded-3xl">
+            <h2 className="text-2xl font-bold">
+              Attendance
+            </h2>
 
-//             <h1 className="text-5xl font-bold">
-//               Welcome Back,
-//               <span className="text-cyan-400">
-//                 {" "}Kartiki 👋
-//               </span>
-//             </h1>
+            <p className="mt-4 text-gray-300">
+              95% Attendance
+            </p>
+          </div>
 
-//             <p className="text-gray-400 mt-2">
-//               Student Dashboard Overview
-//             </p>
+        </div>
 
-//             {/* Cards */}
-//             <div className="grid grid-cols-4 gap-5 mt-10">
+      </div>
+    </div>
+  );
+};
 
-//               <div className="bg-cyan-500 p-6 rounded-3xl">
-//                 <p>Attendance</p>
-//                 <h1 className="text-5xl font-bold">
-//                   92%
-//                 </h1>
-//               </div>
-
-//               <div className="bg-pink-500 p-6 rounded-3xl">
-//                 <p>Leave Status</p>
-//                 <h1 className="text-4xl font-bold">
-//                   Approved
-//                 </h1>
-//               </div>
-
-//               <div className="bg-green-500 p-6 rounded-3xl">
-//                 <p>Room Number</p>
-//                 <h1 className="text-5xl font-bold">
-//                   A-203
-//                 </h1>
-//               </div>
-
-//               <div className="bg-orange-500 p-6 rounded-3xl">
-//                 <p>Complaints</p>
-//                 <h1 className="text-4xl font-bold">
-//                   {complaints.length}
-//                 </h1>
-//               </div>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* ATTENDANCE PAGE */}
-//         {activePage === "attendance" && (
-
-//           <div>
-
-//             <h1 className="text-5xl font-bold mb-8">
-//               Attendance
-//             </h1>
-
-//             <div className="bg-cyan-500 p-10 rounded-3xl w-80">
-
-//               <h1 className="text-6xl font-bold">
-//                 92%
-//               </h1>
-
-//               <p className="mt-3">
-//                 Current Attendance
-//               </p>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* LEAVE PAGE */}
-//         {activePage === "leave" && (
-
-//           <div>
-
-//             <h1 className="text-5xl font-bold mb-8">
-//               Apply Leave
-//             </h1>
-
-//             <div className="bg-white/10 p-8 rounded-3xl">
-
-//               <input
-//                 type="text"
-//                 placeholder="Leave Reason"
-//                 className="w-full p-4 rounded-xl bg-[#0f172a] mb-5"
-//               />
-
-//               <input
-//                 type="date"
-//                 className="w-full p-4 rounded-xl bg-[#0f172a] mb-5"
-//               />
-
-//               <input
-//                 type="date"
-//                 className="w-full p-4 rounded-xl bg-[#0f172a] mb-5"
-//               />
-
-//               <button
-//                 className="bg-cyan-500 px-6 py-3 rounded-xl"
-//               >
-//                 Submit Leave
-//               </button>
-//             </div>
-//           </div>
-//         )}
-
-//         {/* COMPLAINT PAGE */}
-//         {activePage === "complaints" && (
-
-//           <div>
-
-//             <h1 className="text-5xl font-bold mb-8">
-//               Complaints
-//             </h1>
-
-//             {/* Form */}
-//             <div className="bg-white/10 p-8 rounded-3xl mb-8">
-
-//               <input
-//                 type="text"
-//                 placeholder="Complaint Title"
-//                 value={title}
-//                 onChange={(e) => setTitle(e.target.value)}
-//                 className="w-full p-4 rounded-xl bg-[#0f172a] mb-5"
-//               />
-
-//               <textarea
-//                 rows="5"
-//                 placeholder="Describe issue..."
-//                 value={description}
-//                 onChange={(e) =>
-//                   setDescription(e.target.value)
-//                 }
-//                 className="w-full p-4 rounded-xl bg-[#0f172a] mb-5"
-//               ></textarea>
-
-//               <button
-//                 onClick={handleComplaint}
-//                 className="bg-red-500 px-6 py-3 rounded-xl"
-//               >
-//                 Submit Complaint
-//               </button>
-//             </div>
-
-//             {/* Complaint List */}
-//             <div className="space-y-5">
-
-//               {complaints.map((item, index) => (
-
-//                 <div
-//                   key={index}
-//                   className="bg-[#1e293b] p-5 rounded-2xl"
-//                 >
-
-//                   <h2 className="text-2xl font-bold">
-//                     {item.title}
-//                   </h2>
-
-//                   <p className="mt-2 text-gray-300">
-//                     {item.description}
-//                   </p>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         )}
-
-//         {/* NOTIFICATION PAGE */}
-//         {activePage === "notifications" && (
-
-//           <div>
-
-//             <h1 className="text-5xl font-bold mb-8">
-//               Notifications
-//             </h1>
-
-//             <div className="space-y-5">
-
-//               <div className="bg-[#1e293b] p-5 rounded-2xl">
-//                 Hostel meeting at 6 PM.
-//               </div>
-
-//               <div className="bg-[#1e293b] p-5 rounded-2xl">
-//                 Mess menu updated.
-//               </div>
-
-//               <div className="bg-[#1e293b] p-5 rounded-2xl">
-//                 Leave approved by warden.
-//               </div>
-//             </div>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default StudentDashboard;
+export default StudentDashboard;

@@ -60,7 +60,7 @@ const Login = () => {
           data.token
         );
 
-        navigate("/");
+        navigate("/dashboard");
       }
 
     } catch (error) {
