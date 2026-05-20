@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Register = () => {
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -14,22 +15,62 @@ const Register = () => {
     role: "student",
   });
 
+
   const handleChange = (e) => {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+
   };
 
-  const handleRegister = (e) => {
+
+  // REGISTER FUNCTION
+  const handleRegister = async (e) => {
+
     e.preventDefault();
+    console.log(formData);
 
-    console.log("Register Data:", formData);
+    try {
 
-    alert("Registration Successful");
+      const response = await fetch(
+        "http://localhost:5000/api/auth/register",
+        {
+          method: "POST",
 
-    navigate("/login");
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            name: formData.fullName,
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      alert(data.message);
+
+      if (response.ok) {
+        navigate("/login");
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Registration Failed");
+
+    }
   };
+
+
 
   return (
     <div className="min-h-screen bg-[#050816] flex items-center justify-center px-5 py-10 overflow-hidden relative">

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -10,18 +13,63 @@ const Login = () => {
   });
 
   const handleChange = (e) => {
+
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
+
   };
 
-  const handleLogin = (e) => {
+
+  // LOGIN FUNCTION
+  const handleLogin = async (e) => {
+
     e.preventDefault();
 
-    console.log(user);
+    try {
 
-    alert("Login Successful");
+      const response = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            email: user.email,
+            password: user.password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      alert(data.message);
+
+
+      // SAVE TOKEN
+      if (response.ok) {
+
+        localStorage.setItem(
+          "token",
+          data.token
+        );
+
+        navigate("/");
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Login Failed");
+
+    }
   };
 
   return (
