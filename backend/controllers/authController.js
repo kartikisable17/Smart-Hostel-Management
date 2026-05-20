@@ -1,10 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 
-
-// ================= REGISTER =================
+// REGISTER USER
 const registerUser = async (req, res) => {
 
   try {
@@ -12,15 +10,13 @@ const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     // CHECK USER
-    const userExist = await User.findOne({ email });
+    const userExists = await User.findOne({ email });
 
-    if (userExist) {
-
+    if (userExists) {
       return res.status(400).json({
         success: false,
-        message: "User already exists",
+        message: "User Already Exists",
       });
-
     }
 
     // HASH PASSWORD
@@ -33,7 +29,6 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    // RESPONSE
     res.status(201).json({
       success: true,
       message: "Registration Successful",
@@ -54,24 +49,21 @@ const registerUser = async (req, res) => {
 };
 
 
-
-// ================= LOGIN =================
+// LOGIN USER
 const loginUser = async (req, res) => {
 
   try {
 
     const { email, password } = req.body;
 
-    // FIND USER
+    // CHECK USER
     const user = await User.findOne({ email });
 
     if (!user) {
-
       return res.status(400).json({
         success: false,
-        message: "Invalid Email",
+        message: "User Not Found",
       });
-
     }
 
     // CHECK PASSWORD
@@ -81,26 +73,16 @@ const loginUser = async (req, res) => {
     );
 
     if (!isMatch) {
-
       return res.status(400).json({
         success: false,
         message: "Invalid Password",
       });
-
     }
 
-    // TOKEN
-    const token = jwt.sign(
-      { id: user._id },
-      "secretkey",
-      { expiresIn: "7d" }
-    );
-
-    // RESPONSE
+    // SUCCESS
     res.status(200).json({
       success: true,
       message: "Login Successful",
-      token,
       user,
     });
 
@@ -116,7 +98,6 @@ const loginUser = async (req, res) => {
   }
 
 };
-
 
 
 module.exports = {

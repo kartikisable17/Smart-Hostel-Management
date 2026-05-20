@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const complaintRoutes = require("./routes/complaintRoutes");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 connectDB();
 
 app.use("/api/auth", authRoutes);
+app.use("/api/complaints", complaintRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend Running");
