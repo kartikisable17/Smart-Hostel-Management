@@ -1,51 +1,33 @@
 const express = require("express");
 
-const Complaint = require("../models/Complaint");
-
 const router = express.Router();
 
+const Complaint = require("../models/Complaint");
 
-// ADD COMPLAINT
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
 
   try {
 
-    const { title, description } = req.body;
-
     const complaint = new Complaint({
-      title,
-      description,
+      title: req.body.title,
+      type: req.body.type,
+      description: req.body.description,
     });
 
     await complaint.save();
 
     res.status(201).json({
-      message: "Complaint Submitted Successfully",
+      success: true,
+      message: "Complaint Submitted",
+      complaint,
     });
 
   } catch (error) {
 
-    res.status(500).json({
-      message: "Server Error",
-    });
-
-  }
-
-});
-
-
-// GET ALL COMPLAINTS
-router.get("/", async (req, res) => {
-
-  try {
-
-    const complaints = await Complaint.find();
-
-    res.json(complaints);
-
-  } catch (error) {
+    console.log(error);
 
     res.status(500).json({
+      success: false,
       message: "Server Error",
     });
 

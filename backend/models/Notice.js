@@ -1,13 +1,8 @@
 const mongoose = require("mongoose");
 
-const complaintSchema = new mongoose.Schema({
+const noticeSchema = new mongoose.Schema({
 
   title: {
-    type: String,
-    required: true,
-  },
-
-  type: {
     type: String,
     required: true,
   },
@@ -21,4 +16,4 @@ const complaintSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-module.exports = mongoose.model("Complaint", complaintSchema);
+module.exports = mongoose.model("Notice", noticeSchema);

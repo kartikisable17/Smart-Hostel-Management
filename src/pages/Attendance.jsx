@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Attendance = () => {
+
+  const [attendance, setAttendance] = useState({
+    presentDays: 0,
+    absentDays: 0,
+    percentage: 0,
+  });
+
+  useEffect(() => {
+    fetchAttendance();
+  }, []);
+
+  const fetchAttendance = async () => {
+
+    try {
+
+      const res = await axios.get(
+        "http://localhost:5000/api/attendance"
+      );
+
+      if (res.data.length > 0) {
+        setAttendance(res.data[0]);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
   return (
     <div className="min-h-screen bg-[#07111f] text-white p-8">
 
@@ -20,7 +50,7 @@ const Attendance = () => {
           </h2>
 
           <p className="text-5xl mt-4 text-green-400">
-            95
+            {attendance.presentDays}
           </p>
         </div>
 
@@ -30,7 +60,7 @@ const Attendance = () => {
           </h2>
 
           <p className="text-5xl mt-4 text-red-400">
-            5
+            {attendance.absentDays}
           </p>
         </div>
 
@@ -40,11 +70,12 @@ const Attendance = () => {
           </h2>
 
           <p className="text-5xl mt-4 text-cyan-400">
-            95%
+            {attendance.percentage}%
           </p>
         </div>
 
       </div>
+
     </div>
   );
 };

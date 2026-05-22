@@ -1,7 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Complaints = () => {
+
+  const [formData, setFormData] = useState({
+    title: "",
+    type: "",
+    description: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+  };
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    setLoading(true);
+
+    try {
+
+      const res = await axios.post(
+        "http://localhost:5000/api/complaints/add",
+        formData
+      );
+
+      console.log(res.data);
+
+      alert("Complaint Submitted Successfully");
+
+      setFormData({
+        title: "",
+        type: "",
+        description: "",
+      });
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Error Submitting Complaint");
+
+    }
+
+    setLoading(false);
+
+  };
+
   return (
     <div className="min-h-screen bg-[#07111f] text-white flex">
 
@@ -81,61 +135,113 @@ const Complaints = () => {
               Submit Complaint
             </h2>
 
-            <form className="space-y-6">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
 
+              {/* TITLE */}
               <div>
+
                 <label className="text-gray-300">
                   Complaint Title
                 </label>
 
                 <input
                   type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
                   placeholder="Enter complaint title"
+                  required
                   className="w-full mt-2 p-4 rounded-2xl bg-white/10 border border-white/10 outline-none focus:border-pink-400 duration-300"
                 />
+
               </div>
 
+              {/* TYPE */}
               <div>
+
                 <label className="text-gray-300">
                   Complaint Type
                 </label>
 
                 <select
+                  name="type"
+                  value={formData.type}
+                  onChange={handleChange}
+                  required
                   className="w-full mt-2 p-4 rounded-2xl bg-white/10 border border-white/10 outline-none focus:border-pink-400 duration-300"
                 >
-                  <option className="bg-[#07111f]">
+
+                  <option value="">
+                    Select Type
+                  </option>
+
+                  <option
+                    value="Water Issue"
+                    className="bg-[#07111f]"
+                  >
                     Water Issue
                   </option>
 
-                  <option className="bg-[#07111f]">
+                  <option
+                    value="Electricity"
+                    className="bg-[#07111f]"
+                  >
                     Electricity
                   </option>
 
-                  <option className="bg-[#07111f]">
+                  <option
+                    value="Cleaning"
+                    className="bg-[#07111f]"
+                  >
                     Cleaning
                   </option>
 
-                  <option className="bg-[#07111f]">
+                  <option
+                    value="Internet"
+                    className="bg-[#07111f]"
+                  >
                     Internet
                   </option>
 
                 </select>
+
               </div>
 
+              {/* DESCRIPTION */}
               <div>
+
                 <label className="text-gray-300">
                   Description
                 </label>
 
                 <textarea
                   rows="6"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
                   placeholder="Describe your issue"
+                  required
                   className="w-full mt-2 p-4 rounded-2xl bg-white/10 border border-white/10 outline-none focus:border-pink-400 duration-300"
                 ></textarea>
+
               </div>
 
-              <button className="w-full py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-cyan-400 font-bold text-lg hover:scale-105 duration-300 shadow-lg shadow-pink-500/30">
-                Submit Complaint
+              {/* BUTTON */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-cyan-400 font-bold text-lg hover:scale-105 duration-300 shadow-lg shadow-pink-500/30"
+              >
+
+                {
+                  loading
+                  ? "Submitting..."
+                  : "Submit Complaint"
+                }
+
               </button>
 
             </form>
@@ -182,6 +288,7 @@ const Complaints = () => {
         </div>
 
       </div>
+
     </div>
   );
 };
