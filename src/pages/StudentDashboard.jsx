@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const StudentDashboard = () => {
   return (
@@ -13,29 +14,47 @@ const StudentDashboard = () => {
 
         <div className="mt-10 flex flex-col gap-5">
 
-          <button className="text-left p-4 rounded-xl bg-cyan-500/20 hover:bg-cyan-500 duration-300">
-            Dashboard
-          </button>
+          {/* Dashboard */}
+          <Link to="/dashboard">
+            <button className="w-full text-left p-4 rounded-xl bg-cyan-500/20 hover:bg-cyan-500 duration-300">
+              Dashboard
+            </button>
+          </Link>
 
-          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
-            Leave Application
-          </button>
+          {/* Leave */}
+          <Link to="/leave">
+            <button className="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
+              Leave Application
+            </button>
+          </Link>
 
-          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
-            Complaints
-          </button>
+          {/* Complaints */}
+          <Link to="/complaints">
+            <button className="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
+              Complaints
+            </button>
+          </Link>
 
-          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
-            Attendance
-          </button>
+          {/* Attendance */}
+          <Link to="/attendance">
+            <button className="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
+              Attendance
+            </button>
+          </Link>
 
-          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
-            Notices
-          </button>
+          {/* Notices */}
+          <Link to="/notices">
+            <button className="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-pink-500 duration-300">
+              Notices
+            </button>
+          </Link>
 
-          <button className="text-left p-4 rounded-xl bg-white/5 hover:bg-red-500 duration-300 mt-10">
-            Logout
-          </button>
+          {/* Logout */}
+          <Link to="/">
+            <button className="w-full text-left p-4 rounded-xl bg-white/5 hover:bg-red-500 duration-300 mt-10">
+              Logout
+            </button>
+          </Link>
 
         </div>
       </div>
@@ -61,7 +80,8 @@ const StudentDashboard = () => {
         {/* CARDS */}
         <div className="grid grid-cols-3 gap-6 mt-10">
 
-          <div className="bg-cyan-500/20 p-6 rounded-3xl">
+          {/* Leave Status */}
+          <div className="bg-cyan-500/20 p-6 rounded-3xl border border-cyan-400/20 hover:scale-105 duration-300">
             <h2 className="text-2xl font-bold">
               Leave Status
             </h2>
@@ -71,7 +91,8 @@ const StudentDashboard = () => {
             </p>
           </div>
 
-          <div className="bg-pink-500/20 p-6 rounded-3xl">
+          {/* Complaints */}
+          <div className="bg-pink-500/20 p-6 rounded-3xl border border-pink-400/20 hover:scale-105 duration-300">
             <h2 className="text-2xl font-bold">
               Complaints
             </h2>
@@ -81,7 +102,8 @@ const StudentDashboard = () => {
             </p>
           </div>
 
-          <div className="bg-green-500/20 p-6 rounded-3xl">
+          {/* Attendance */}
+          <div className="bg-green-500/20 p-6 rounded-3xl border border-green-400/20 hover:scale-105 duration-300">
             <h2 className="text-2xl font-bold">
               Attendance
             </h2>

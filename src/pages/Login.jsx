@@ -21,7 +21,6 @@ const Login = () => {
 
   };
 
-
   // LOGIN FUNCTION
   const handleLogin = async (e) => {
 
@@ -49,25 +48,25 @@ const Login = () => {
 
       console.log(data);
 
-      alert(data.message);
-
-
-      // SAVE TOKEN
+      // SUCCESS
       if (response.ok) {
 
-        localStorage.setItem(
-          "token",
-          data.token
-        );
+        alert(data.message);
 
         navigate("/dashboard");
+
+      } else {
+
+        // ERROR MESSAGE
+        alert(data.message);
+
       }
 
     } catch (error) {
 
       console.log(error);
 
-      alert("Login Failed");
+      alert("Server Error");
 
     }
   };
@@ -166,6 +165,7 @@ const Login = () => {
           >
             Login
           </motion.button>
+
         </form>
 
         {/* REGISTER LINK */}
@@ -178,6 +178,7 @@ const Login = () => {
             Register
           </Link>
         </p>
+
       </motion.div>
     </div>
   );
