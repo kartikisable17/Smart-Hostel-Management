@@ -53,7 +53,24 @@ const Login = () => {
 
         alert(data.message);
 
-        navigate("/dashboard");
+        // ROLE BASED NAVIGATION
+        if (user.role === "Student") {
+
+          navigate("/dashboard");
+
+        }
+
+        else if (user.role === "Warden") {
+
+          navigate("/warden");
+
+        }
+
+        else if (user.role === "Admin") {
+
+          navigate("/rector");
+
+        }
 
       } else {
 
@@ -151,7 +168,6 @@ const Login = () => {
               className="w-full mt-2 p-4 rounded-xl bg-white/10 border border-white/10 outline-none text-white"
             >
               <option className="text-black">Student</option>
-              <option className="text-black">Super Student</option>
               <option className="text-black">Warden</option>
               <option className="text-black">Admin</option>
             </select>

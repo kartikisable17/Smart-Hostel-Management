@@ -8,6 +8,7 @@ import LeaveApplication from "./pages/LeaveApplication";
 import Complaints from "./pages/Complaints";
 import Attendance from "./pages/Attendance";
 import Notices from "./pages/Notices";
+import WardenDashboard from "./pages/WardenDashboard";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         <Route path="/complaints" element={<Complaints />} />
         <Route path="/attendance" element={<Attendance />} />
         <Route path="/notices" element={<Notices />} />
-      </Routes>
+        <Route path="/warden" element={<WardenDashboard />} />     
+ </Routes>
     </BrowserRouter>
   );
 }

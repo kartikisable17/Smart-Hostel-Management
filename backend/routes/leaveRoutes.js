@@ -4,6 +4,8 @@ const router = express.Router();
 
 const Leave = require("../models/Leave");
 
+
+// ADD LEAVE
 router.post("/add", async (req, res) => {
 
   try {
@@ -25,6 +27,29 @@ router.post("/add", async (req, res) => {
       success: true,
       message: "Leave Submitted Successfully",
     });
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+
+  }
+
+});
+
+
+// GET ALL LEAVES
+router.get("/", async (req, res) => {
+
+  try {
+
+    const leaves = await Leave.find();
+
+    res.json(leaves);
 
   } catch (error) {
 
